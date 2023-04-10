@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "watch": "deno run -A --watch --unstable cosas_rápidas_deno.ts",
+    "run": "deno run -A --unstable cosas_rápidas_deno.ts"
+  },
+  "allowSyntheticDefaultImports": true
+}

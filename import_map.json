@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "joi": "https://esm.sh/joi@17.6.4",
+    "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
+    "opine": "https://deno.land/x/opine@2.3.3/mod.ts",
+    "axiod": "https://deno.land/x/axiod@0.26.2/mod.ts",
+    "jose": "https://deno.land/x/jose@v4.10.3/index.ts",
+    "path": "https://deno.land/std@0.160.0/path/mod.ts",
+    "mongo": "https://deno.land/x/mongo@v0.31.1/mod.ts",
+    "dotenv": "https://deno.land/x/dotenv@v3.2.0/load.ts",
+    "bycrypt": "https://deno.land/x/bcrypt@v0.4.1/src/main.ts"
+  }
+}
