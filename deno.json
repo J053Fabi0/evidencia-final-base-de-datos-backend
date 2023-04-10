@@ -1,7 +1,8 @@
 {
+  "importMap": "./import_map.json",
   "tasks": {
-    "watch": "deno run -A --watch --unstable cosas_rápidas_deno.ts",
-    "run": "deno run -A --unstable cosas_rápidas_deno.ts"
+    "watch": "deno run -A --watch --unstable index.ts",
+    "run": "deno run -A --unstable index.ts"
   },
   "allowSyntheticDefaultImports": true
 }
