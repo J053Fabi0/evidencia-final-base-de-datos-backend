@@ -1,13 +1,10 @@
 import CommonRequest from "../commonRequest.type.ts";
 
-export type GetPerson = CommonRequest<
-  undefined,
-  { id: string; name: undefined } | { id: undefined; name: string }
->;
+export type GetPerson = CommonRequest<undefined, { _id: string } | { name: string }>;
 
 export type GetPersons = CommonRequest<{
   names?: string[];
-  ids?: string[];
+  _ids?: string[];
 }>;
 
 export type PostPerson = CommonRequest<{
@@ -15,10 +12,10 @@ export type PostPerson = CommonRequest<{
   age: string;
 }>;
 
-export type DeletePerson = CommonRequest<{ id: string; name: undefined } | { id: undefined; name: string }>;
+export type DeletePerson = CommonRequest<{ _id: string } | { name: string }>;
 
 export type UpdatePerson = CommonRequest<
-  | { id: string; name?: string; age?: string }
+  | { _id: string; name?: string; age?: string }
   //
-  | { id: undefined; name: string; age: string }
+  | { _id: undefined; name: string; age: string }
 >;

@@ -10,9 +10,7 @@ import CommonResponse from "../../types/commonResponse.type.ts";
 import { GetPerson, GetPersons, PostPerson, UpdatePerson, DeletePerson } from "../../types/api/persons.ts";
 
 export const getPerson = async ({ query }: GetPerson, res: CommonResponse) => {
-  const { id, ...personQuery } = query;
-
-  const person = await getPersonCtrl({ ...(id ? { _id: id } : {}), ...personQuery });
+  const person = await getPersonCtrl(query);
   if (!person) return handleError(res, "Person not found", 404);
 
   const { _id, name, age } = person;
@@ -29,19 +27,19 @@ export const postPerson = async ({ body }: PostPerson, res: CommonResponse) => {
 
 export const updatePerson = async ({ body }: UpdatePerson, res: CommonResponse) => {
   const updatedPerson = await (async () => {
-    if (body.id === undefined) {
+    if (body._id === undefined) {
       await changePerson({ name: body.name }, { age: body.age });
       return getPersonCtrl({ name: body.name });
     }
 
     await changePerson(
-      { _id: body.id },
+      { _id: body._id },
       {
         ...(body.name ? { name: body.name } : {}),
         ...(body.age ? { age: body.age } : {}),
       }
     );
-    return getPersonCtrl({ _id: body.id });
+    return getPersonCtrl({ _id: body._id });
   })();
 
   if (!updatedPerson) return handleError(res, "Person not found", 404);
@@ -49,9 +47,7 @@ export const updatePerson = async ({ body }: UpdatePerson, res: CommonResponse) 
 };
 
 export const deletePerson = async ({ body }: DeletePerson, res: CommonResponse) => {
-  const query: { name: string } | { _id: string } = body.id === undefined ? { name: body.name } : { _id: body.id };
-
-  const person = await findAndDeletePerson(query);
+  const person = await findAndDeletePerson(body);
   if (!person) return handleError(res, "Person not found", 404);
 
   res.send({ message: "Person deleted" });
