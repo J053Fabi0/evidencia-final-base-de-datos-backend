@@ -24,5 +24,3 @@ app.use((err: Error, _: CommonRequest, res: CommonResponse, __: NextFunction) =>
 
 const port = +Deno.env.get("PORT")!;
 app.listen(port, () => console.log(`Listening on: http://localhost:${port}`));
-
-export default app;
