@@ -25,8 +25,6 @@ export const postPerson = a(
   })
 );
 
-export const deletePerson = a(Joi.object({ id, name }).xor("name", "id"));
-
 export const updatePerson = a(
   Joi.object({
     id,
@@ -53,3 +51,5 @@ export const updatePerson = a(
     return value;
   })
 );
+
+export const deletePerson = a(Joi.object({ id, name }).xor("name", "id"));
