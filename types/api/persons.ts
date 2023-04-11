@@ -18,9 +18,7 @@ export type PostPerson = CommonRequest<{
 export type DeletePerson = CommonRequest<{ id: string } | { name: string }>;
 
 export type UpdatePerson = CommonRequest<
-  | { id: string; name: string; age: string }
+  | { id: string; name?: string; age?: string }
   //
-  | { id: string; name: string; age: undefined },
-  //
-  { id: string; name: undefined; age: string }
+  | { id: undefined; name: string; age: string }
 >;
