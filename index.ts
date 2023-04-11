@@ -1,3 +1,7 @@
+import router from "./routes/routes.ts";
+import handleError from "./utils/handleError.ts";
+import CommonRequest from "./types/commonRequest.type.ts";
+import CommonResponse from "./types/commonResponse.type.ts";
 import { opine, opineCors, json, mongoose, NextFunction } from "./deps.ts";
 
 // Check that all required .env variables are set
@@ -12,17 +16,11 @@ const app = opine();
 app.use(json());
 app.use(opineCors());
 
-import router from "./routes/routes.ts";
-import CommonRequest from "./types/commonRequest.type.ts";
-import CommonResponse from "./types/commonResponse.type.ts";
-import handleError from "./utils/handleError.ts";
+// Use all the routes
 app.use("/", router);
 
 // Error handling
-// deno-lint-ignore no-explicit-any
-app.use(function (err: any, _: CommonRequest, res: CommonResponse, __: NextFunction) {
-  handleError(res, err);
-});
+app.use((err: Error, _: CommonRequest, res: CommonResponse, __: NextFunction) => handleError(res, err));
 
 const port = +Deno.env.get("PORT")!;
 app.listen(port, () => console.log(`Listening on: http://localhost:${port}`));
