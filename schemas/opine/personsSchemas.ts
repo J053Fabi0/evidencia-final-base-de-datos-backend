@@ -1,9 +1,9 @@
 import { Joi } from "../../deps.ts";
 import { a } from "./schemaUtils.ts";
 
-const id = Joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const name = Joi.string().min(2).max(30);
-const age = Joi.number().integer().min(0).max(120);
+const id = Joi.string().length(24).hex();
+const age = Joi.number().integer().min(18).max(120);
 
 export const getPerson = a(
   Joi.object({
@@ -30,25 +30,24 @@ export const updatePerson = a(
     id,
     age,
     name,
-  }).custom((value, helpers) => {
-    if (value.id) {
-      if (!value.name && !value.age)
-        return helpers.error("object.missing", {
-          peers: ["name", "age"],
-          peersWithLabels: ["name", "age"],
-        });
-    } else {
-      const schema = Joi.object({ name: name.required(), age: age.required() });
-      const { error } = schema.validate(value);
-      if (error) {
-        const { type, context, path, message } = error.details[0];
-        const newError = helpers.error(type, context);
-        newError.message = message + " when no id is given";
-        newError.path = path.map((p) => p.toString());
-        return newError;
-      }
-    }
-    return value;
+  }).when(Joi.ref("."), {
+    switch: [
+      // If id and name are not present, then id or name must be present
+      {
+        is: Joi.object({ id: Joi.any().forbidden(), name: Joi.any().forbidden() }),
+        then: Joi.object({ id: Joi.any(), name: Joi.any() }).or("id", "name"),
+      },
+      // If id is present, then name or age must be present
+      {
+        is: Joi.object({ id: Joi.any().required() }),
+        then: Joi.object({ name: Joi.any(), age: Joi.any() }).or("name", "age"),
+      },
+      // If name is present, then age or id must be present
+      {
+        is: Joi.object({ name: Joi.any().required() }),
+        then: Joi.object({ age: Joi.any(), id: Joi.any() }).or("age", "id"),
+      },
+    ],
   })
 );
 
