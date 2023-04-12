@@ -2,10 +2,7 @@ import CommonRequest from "../commonRequest.type.ts";
 
 export type GetPerson = CommonRequest<undefined, { _id: string } | { name: string }>;
 
-export type GetPersons = CommonRequest<{
-  names?: string[];
-  _ids?: string[];
-}>;
+export type GetPersons = CommonRequest;
 
 export type PostPerson = CommonRequest<{
   name: string;

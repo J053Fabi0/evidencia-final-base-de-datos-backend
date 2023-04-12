@@ -9,12 +9,7 @@ export const getPerson = a(
   "query"
 );
 
-export const getPersons = a(
-  joi.object({
-    names: Joi.array().items(name),
-    ids: Joi.array().items(id),
-  })
-);
+export const getPersons = a(joi.object({}), "query");
 
 export const postPerson = a(
   joi.object({

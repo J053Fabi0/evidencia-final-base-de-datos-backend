@@ -17,8 +17,8 @@ export const getPerson = async ({ query }: GetPerson, res: CommonResponse) => {
   res.send({ message: { name, age, id: _id } });
 };
 
-export const getPersons = async ({ body }: GetPersons, res: CommonResponse) =>
-  res.send({ message: (await getPersonsCtrl(body)).map(({ name, age, _id }) => ({ name, age, id: _id })) });
+export const getPersons = async (_: GetPersons, res: CommonResponse) =>
+  res.send({ message: (await getPersonsCtrl({})).map(({ name, age, _id }) => ({ name, age, id: _id })) });
 
 export const postPerson = async ({ body }: PostPerson, res: CommonResponse) => {
   const { name, age, _id } = await createPerson(body);
