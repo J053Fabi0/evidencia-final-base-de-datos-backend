@@ -1,4 +1,4 @@
-import Cat from "../../models/cat.ts";
+import Cat from "../../models/catModel.ts";
 
 type FindOneParams = Parameters<typeof Cat.findOne>;
 type FindParams = Parameters<typeof Cat.find>;

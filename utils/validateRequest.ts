@@ -3,6 +3,9 @@ import { Joi, NextFunction } from "../deps.ts";
 import CommonRequest from "../types/commonRequest.type.ts";
 import CommonResponse from "../types/commonResponse.type.ts";
 
+// params is for /:[param] requests
+// query is for GET requests with ?key=value
+// body is for POST, PUT, PATCH requests with JSON body
 export type Element = "body" | "query" | "params";
 
 // https://jasonwatmore.com/post/2020/07/22/nodejs-express-api-request-schema-validation-with-joi

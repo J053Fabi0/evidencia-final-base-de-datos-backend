@@ -1,4 +1,4 @@
-import Person from "../../models/person.ts";
+import Person from "../../models/personModel.ts";
 
 export const getPersons = Person.find.bind(Person);
 export const getPerson = Person.findOne.bind(Person);

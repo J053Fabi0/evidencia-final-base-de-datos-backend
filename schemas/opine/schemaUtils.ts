@@ -7,6 +7,7 @@ export const joi = Joi.defaults((schema) => {
   switch (schema.type) {
     case "object":
       return (schema as ObjectSchema).custom((value) => {
+        // rename id to _id for every object schema
         if ("id" in value) {
           value._id = value.id;
           delete value.id;

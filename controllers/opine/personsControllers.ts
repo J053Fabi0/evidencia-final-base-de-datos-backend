@@ -7,7 +7,7 @@ import {
 } from "../../controllers/mongo/person.ts";
 import handleError from "../../utils/handleError.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
-import { GetPerson, GetPersons, PostPerson, UpdatePerson, DeletePerson } from "../../types/api/persons.ts";
+import { GetPerson, GetPersons, PostPerson, UpdatePerson, DeletePerson } from "../../types/api/persons.type.ts";
 
 export const getPerson = async ({ query }: GetPerson, res: CommonResponse) => {
   const person = await getPersonCtrl(query);
