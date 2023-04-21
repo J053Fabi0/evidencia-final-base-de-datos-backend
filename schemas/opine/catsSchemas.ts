@@ -13,3 +13,13 @@ export const postCat = a(
     owner: id.default(null),
   })
 );
+
+export const updateCat = a(
+  joi
+    .object({
+      id: id.required(),
+      name,
+      owner: id,
+    })
+    .or("name", "owner")
+);

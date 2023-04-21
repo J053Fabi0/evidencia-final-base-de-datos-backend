@@ -9,7 +9,7 @@ catsRoutes.get("/cats", s.getCats, c.getCats);
 
 catsRoutes.post("/cat", s.postCat, c.postCat);
 
-// catsRoutes.patch("/cat", s.updateCat, c.updateCat);
+catsRoutes.patch("/cat", s.updateCat, c.updateCat);
 
 // catsRoutes.delete("/cat", s.deleteCat, c.deleteCat);
 

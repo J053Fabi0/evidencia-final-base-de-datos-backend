@@ -1,7 +1,12 @@
 import handleError from "../../utils/handleError.ts";
-import { GetCat, GetCats, PostCat } from "../../types/api/cats.type.ts";
+import { GetCat, GetCats, PostCat, UpdateCat } from "../../types/api/cats.type.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
-import { getCat as getCatCtrl, getCats as getCatsCtrl, createCat } from "../../controllers/mongo/cat.ts";
+import {
+  getCat as getCatCtrl,
+  getCats as getCatsCtrl,
+  createCat,
+  changeCat,
+} from "../../controllers/mongo/cat.ts";
 import { getPerson } from "../mongo/person.ts";
 
 export async function getCat({ query }: GetCat, res: CommonResponse) {
@@ -23,4 +28,19 @@ export async function postCat({ body }: PostCat, res: CommonResponse) {
 
   const { _id, name, owner } = await createCat(body);
   res.send({ message: { id: _id, name, owner } });
+}
+
+export async function updateCat({ body: { _id, ...data } }: UpdateCat, res: CommonResponse) {
+  if (data.owner) {
+    const foundOwner = await getPerson({ _id: data.owner });
+    if (!foundOwner) return handleError(res, "Owner not found", 404);
+  }
+
+  const updateCat = await (async () => {
+    await changeCat({ _id }, data);
+    return await getCatCtrl({ _id });
+  })();
+
+  if (!updateCat) return handleError(res, "Cat not found", 404);
+  res.send({ message: { id: updateCat._id, name: updateCat.name, owner: updateCat.owner } });
 }
