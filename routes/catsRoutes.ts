@@ -7,7 +7,7 @@ const catsRoutes = Router();
 catsRoutes.get("/cat", s.getCat, c.getCat);
 // catsRoutes.get("/cats", s.getCats, c.getCats);
 
-// catsRoutes.post("/cat", s.postCat, c.postCat);
+catsRoutes.post("/cat", s.postCat, c.postCat);
 
 // catsRoutes.patch("/cat", s.updateCat, c.updateCat);
 
