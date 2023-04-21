@@ -19,7 +19,7 @@ export const updateCat = a(
     .object({
       id: id.required(),
       name,
-      owner: id,
+      owner: id.allow(null),
     })
     .or("name", "owner")
 );
