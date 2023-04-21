@@ -5,6 +5,7 @@ import {
   getPerson as getPersonCtrl,
   getPersons as getPersonsCtrl,
 } from "../../controllers/mongo/person.ts";
+import { changeCats } from "../mongo/cat.ts";
 import handleError from "../../utils/handleError.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
 import { GetPerson, GetPersons, PostPerson, UpdatePerson, DeletePerson } from "../../types/api/persons.type.ts";
@@ -49,6 +50,9 @@ export const updatePerson = async ({ body }: UpdatePerson, res: CommonResponse) 
 export const deletePerson = async ({ body }: DeletePerson, res: CommonResponse) => {
   const person = await findAndDeletePerson(body);
   if (!person) return handleError(res, "Person not found", 404);
+
+  // Update all cats that had this person as owner to have no owner
+  await changeCats({ owner: person._id }, { owner: null });
 
   res.send({ message: "Person deleted" });
 };
