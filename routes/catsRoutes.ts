@@ -5,7 +5,7 @@ import * as c from "../controllers/opine/catsControllers.ts";
 const catsRoutes = Router();
 
 catsRoutes.get("/cat", s.getCat, c.getCat);
-// catsRoutes.get("/cats", s.getCats, c.getCats);
+catsRoutes.get("/cats", s.getCats, c.getCats);
 
 catsRoutes.post("/cat", s.postCat, c.postCat);
 

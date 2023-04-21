@@ -4,10 +4,7 @@ export type GetPerson = CommonRequest<undefined, { _id: string } | { name: strin
 
 export type GetPersons = CommonRequest;
 
-export type PostPerson = CommonRequest<{
-  name: string;
-  age: string;
-}>;
+export type PostPerson = CommonRequest<{ name: string; age: string }>;
 
 export type DeletePerson = CommonRequest<{ _id: string } | { name: string }>;
 
