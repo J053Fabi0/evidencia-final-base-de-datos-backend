@@ -23,3 +23,5 @@ export const updateCat = a(
     })
     .or("name", "owner")
 );
+
+export const deleteCat = a(joi.object({ id: id.required() }));

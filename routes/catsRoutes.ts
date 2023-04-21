@@ -11,6 +11,6 @@ catsRoutes.post("/cat", s.postCat, c.postCat);
 
 catsRoutes.patch("/cat", s.updateCat, c.updateCat);
 
-// catsRoutes.delete("/cat", s.deleteCat, c.deleteCat);
+catsRoutes.delete("/cat", s.deleteCat, c.deleteCat);
 
 export default catsRoutes;

@@ -1,13 +1,14 @@
-import handleError from "../../utils/handleError.ts";
-import { GetCat, GetCats, PostCat, UpdateCat } from "../../types/api/cats.type.ts";
-import CommonResponse from "../../types/commonResponse.type.ts";
 import {
-  getCat as getCatCtrl,
-  getCats as getCatsCtrl,
   createCat,
   changeCat,
+  deleteOneCat,
+  getCat as getCatCtrl,
+  getCats as getCatsCtrl,
 } from "../../controllers/mongo/cat.ts";
 import { getPerson } from "../mongo/person.ts";
+import handleError from "../../utils/handleError.ts";
+import CommonResponse from "../../types/commonResponse.type.ts";
+import { GetCat, GetCats, PostCat, UpdateCat, DeleteCat } from "../../types/api/cats.type.ts";
 
 export async function getCat({ query }: GetCat, res: CommonResponse) {
   const cat = await getCatCtrl(query);
@@ -43,4 +44,11 @@ export async function updateCat({ body: { _id, ...data } }: UpdateCat, res: Comm
 
   if (!updateCat) return handleError(res, "Cat not found", 404);
   res.send({ message: { id: updateCat._id, name: updateCat.name, owner: updateCat.owner } });
+}
+
+export async function deleteCat({ body }: DeleteCat, res: CommonResponse) {
+  const cat = await deleteOneCat(body);
+  if (cat.deletedCount === 0) return handleError(res, "Cat not found", 404);
+
+  res.send({ message: "Cat deleted" });
 }
