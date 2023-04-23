@@ -1,8 +1,8 @@
 {
   "imports": {
-    "joi": "https://esm.sh/joi@17.6.4",
+    "joi": "https://esm.sh/joi@17.9.1",
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
-    "opine": "https://deno.land/x/opine@2.3.3/mod.ts",
+    "opine": "https://deno.land/x/opine@2.3.4/mod.ts",
     "dotenv": "https://deno.land/x/dotenv@v3.2.0/load.ts"
   }
 }
