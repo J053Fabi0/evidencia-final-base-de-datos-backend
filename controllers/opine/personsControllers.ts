@@ -5,8 +5,8 @@ import {
   getPerson as getPersonCtrl,
   getPersons as getPersonsCtrl,
 } from "../../controllers/mongo/person.ts";
-import { changeCats } from "../mongo/cat.ts";
 import handleError from "../../utils/handleError.ts";
+import { changeCats, getCats } from "../mongo/cat.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
 import { GetPerson, GetPersons, PostPerson, UpdatePerson, DeletePerson } from "../../types/api/persons.type.ts";
 
@@ -15,11 +15,33 @@ export const getPerson = async ({ query }: GetPerson, res: CommonResponse) => {
   if (!person) return handleError(res, "Person not found", 404);
 
   const { _id, name, age } = person;
-  res.send({ message: { name, age, id: _id } });
+  const cats = (await getCats({ owner: _id }, "name")).map((cat) => ({
+    id: cat._id,
+    name: cat.name,
+  }));
+
+  res.send({ message: { name, age, cats, id: _id } });
 };
 
-export const getPersons = async (_: GetPersons, res: CommonResponse) =>
-  res.send({ message: (await getPersonsCtrl({})).map(({ name, age, _id }) => ({ name, age, id: _id })) });
+export const getPersons = async (_: GetPersons, res: CommonResponse) => {
+  const persons = (await getPersonsCtrl({})).map(({ name, age, _id }) => ({
+    name,
+    age,
+    cats: [] as { id: typeof _id; name: string }[],
+    id: _id,
+  }));
+
+  await Promise.all(
+    persons.map(
+      async (person) =>
+        (person.cats = (
+          await getCats({ owner: person.id }, "name")
+        ).map((cat) => ({ id: cat._id, name: cat.name })))
+    )
+  );
+
+  res.send({ message: persons });
+};
 
 export const postPerson = async ({ body }: PostPerson, res: CommonResponse) => {
   const { name, age, _id } = await createPerson(body);

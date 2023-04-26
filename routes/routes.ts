@@ -1,6 +1,6 @@
 import { Router } from "../deps.ts";
-import personsRoutes from "./personsRoutes.ts";
 import catsRoutes from "./catsRoutes.ts";
+import personsRoutes from "./personsRoutes.ts";
 
 const router = Router();
 
