@@ -11,15 +11,35 @@ import CommonResponse from "../../types/commonResponse.type.ts";
 import { GetCat, GetCats, PostCat, UpdateCat, DeleteCat } from "../../types/api/cats.type.ts";
 
 export async function getCat({ query }: GetCat, res: CommonResponse) {
-  const cat = await getCatCtrl(query);
+  const cat = await getCatCtrl(query).populate("owner", "name age _id");
   if (!cat) return handleError(res, "Cat not found", 404);
 
   const { _id, name, owner } = cat;
-  res.send({ message: { id: _id, name, owner } });
+  res.send({
+    message: {
+      name,
+      owner: {
+        name: owner.name,
+        age: owner.age,
+        id: owner.id,
+      },
+      id: _id,
+    },
+  });
 }
 
 export const getCats = async (_: GetCats, res: CommonResponse) =>
-  res.send({ message: (await getCatsCtrl({})).map(({ name, owner, _id }) => ({ name, owner, id: _id })) });
+  res.send({
+    message: (await getCatsCtrl({}).populate("owner", "name age _id")).map(({ name, owner, _id }) => ({
+      name,
+      owner: {
+        name: owner.name,
+        age: owner.age,
+        id: owner.id,
+      },
+      id: _id,
+    })),
+  });
 
 export async function postCat({ body }: PostCat, res: CommonResponse) {
   if (body.owner) {
