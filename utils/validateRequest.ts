@@ -1,5 +1,5 @@
 import handleError from "./handleError.ts";
-import { Joi, NextFunction } from "../deps.ts";
+import { Joi, NextFunction, ValidationOptions } from "../deps.ts";
 import CommonRequest from "../types/commonRequest.type.ts";
 import CommonResponse from "../types/commonResponse.type.ts";
 
@@ -14,13 +14,9 @@ export default function validateRequest(
   res: CommonResponse,
   next: NextFunction | undefined,
   schema: Joi.Schema,
-  element: Element = "body"
+  element: Element = "body",
+  options: ValidationOptions
 ) {
-  const options = {
-    convert: true,
-    abortEarly: true, // incluír solo el primer error
-    stripUnknown: true, // eliminar los unknown
-  };
   const { error, value } = schema.validate(req[element], options);
 
   // Si solo se está probando el esquema retornar el resultado de la validación

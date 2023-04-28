@@ -39,9 +39,15 @@ export const updateStudent = a(
     .object({
       id: id.required(),
       name,
-      owner: id.allow(null),
+      email,
+      phone,
+      status,
+      career,
+      birthDate,
+      direction,
+      secondName,
     })
-    .or("name", "owner")
+    .or("name", "status", "career", "birthDate", "secondName", "email", "phone", "direction")
 );
 
 export const deleteStudent = a(joi.object({ id: id.required() }));

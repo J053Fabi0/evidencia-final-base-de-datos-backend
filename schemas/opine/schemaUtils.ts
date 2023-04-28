@@ -1,7 +1,7 @@
 import CommonRequest from "../../types/commonRequest.type.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
-import { Joi, NextFunction, ObjectSchema } from "../../deps.ts";
 import validateRequest, { Element } from "../../utils/validateRequest.ts";
+import { Joi, NextFunction, ObjectSchema, ValidationOptions } from "../../deps.ts";
 
 export const joi = Joi.defaults((schema) => {
   switch (schema.type) {
@@ -20,8 +20,15 @@ export const joi = Joi.defaults((schema) => {
   }
 });
 
+const defaultOptions: ValidationOptions = {
+  convert: true,
+  abortEarly: true, // incluír solo el primer error
+  stripUnknown: true, // eliminar los unknown
+};
+
 export const a =
-  (schema: Joi.Schema, element?: Element) => (req: CommonRequest, res: CommonResponse, next: NextFunction) =>
-    validateRequest(req, res, next, schema, element);
+  (schema: Joi.Schema, element?: Element, options = defaultOptions) =>
+  (req: CommonRequest, res: CommonResponse, next: NextFunction) =>
+    validateRequest(req, res, next, schema, element, options);
 
 export const id = joi.string().length(24).hex();

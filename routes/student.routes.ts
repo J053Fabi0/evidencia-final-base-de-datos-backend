@@ -4,13 +4,13 @@ import * as c from "../controllers/opine/student.controllers.ts";
 
 const studentRoutes = Router();
 
-// studentRoutes.get("/student", s.getStudent, c.getStudent);
+studentRoutes.get("/student", s.getStudent, c.getStudent);
 studentRoutes.get("/students", s.getStudents, c.getStudents);
 
 studentRoutes.post("/student", s.postStudent, c.postStudent);
 
-// studentRoutes.patch("/student", s.updateStudent, c.updateStudent);
+studentRoutes.patch("/student", s.updateStudent, c.updateStudent);
 
-// studentRoutes.delete("/student", s.deleteStudent, c.deleteStudent);
+studentRoutes.delete("/student", s.deleteStudent, c.deleteStudent);
 
 export default studentRoutes;
