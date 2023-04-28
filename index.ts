@@ -10,7 +10,14 @@ for (const envVariable of envVariables)
   if (Deno.env.get(envVariable) === undefined) console.log(`${envVariable} not set in .env.`), Deno.exit(0);
 
 // Connect to MongoDB
-await mongoose.connect(Deno.env.get("MONGO_URI")!);
+await mongoose.connect(Deno.env.get("MONGO_URI")!, {
+  hints: undefined,
+  family: undefined,
+  lookup: undefined,
+  dbName: "students",
+  localPort: undefined,
+  localAddress: undefined,
+});
 
 const app = opine();
 app.use(json());
