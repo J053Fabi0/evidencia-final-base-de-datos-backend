@@ -4,21 +4,21 @@ import { a, id, joi } from "./schemaUtils.ts";
 const name = Joi.string().min(2).max(30);
 const age = Joi.number().integer().min(18).max(120);
 
-export const getPerson = a(
+export const getCareer = a(
   Joi.object({ name, id }).xor("name", "id").unknown().rename("id", "_id", { ignoreUndefined: true, alias: true }),
   "query"
 );
 
-export const getPersons = a(joi.object({}), "query");
+export const getCareers = a(joi.object({}), "query");
 
-export const postPerson = a(
+export const postCareer = a(
   joi.object({
     name: name.required(),
     age: age.required(),
   })
 );
 
-export const updatePerson = a(
+export const updateCareer = a(
   joi
     .object({
       id,
@@ -46,4 +46,4 @@ export const updatePerson = a(
     })
 );
 
-export const deletePerson = a(joi.object({ id, name }).xor("name", "id"));
+export const deleteCareer = a(joi.object({ id, name }).xor("name", "id"));

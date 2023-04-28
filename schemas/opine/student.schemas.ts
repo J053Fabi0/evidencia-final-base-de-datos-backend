@@ -3,18 +3,18 @@ import { a, id, joi } from "./schemaUtils.ts";
 
 const name = Joi.string().min(2).max(30);
 
-export const getCat = a(joi.object({ id: id.required() }), "query");
+export const getStudent = a(joi.object({ id: id.required() }), "query");
 
-export const getCats = a(joi.object({}), "query");
+export const getStudents = a(joi.object({}), "query");
 
-export const postCat = a(
+export const postStudent = a(
   joi.object({
     name: name.required(),
     owner: id.default(null),
   })
 );
 
-export const updateCat = a(
+export const updateStudent = a(
   joi
     .object({
       id: id.required(),
@@ -24,4 +24,4 @@ export const updateCat = a(
     .or("name", "owner")
 );
 
-export const deleteCat = a(joi.object({ id: id.required() }));
+export const deleteStudent = a(joi.object({ id: id.required() }));
