@@ -8,7 +8,7 @@ careerRoutes.get("/careers", s.getCareers, c.getCareers);
 
 careerRoutes.post("/career", s.postCareer, c.postCareer);
 
-// careerRoutes.patch("/career", s.updateCareer, c.updateCareer);
+careerRoutes.patch("/career", s.updateCareer, c.updateCareer);
 
 // careerRoutes.delete("/career", s.deleteCareer, c.deleteCareer);
 
