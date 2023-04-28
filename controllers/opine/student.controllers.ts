@@ -7,8 +7,9 @@ import {
 } from "../../controllers/mongo/student.ts";
 import { countCareers } from "../mongo/career.ts";
 import handleError from "../../utils/handleError.ts";
-import { PostStudent } from "../../types/api/student.type.ts";
+import { GetStudents, PostStudent } from "../../types/api/student.type.ts";
 import CommonResponse from "../../types/commonResponse.type.ts";
+import { pretifyId } from "../../utils/pretifyId.ts";
 
 // export async function getStudent({ query }: GetStudent, res: CommonResponse) {
 //   const cat = await getStudentCtrl(query).populate("owner", "name age _id");
@@ -28,18 +29,20 @@ import CommonResponse from "../../types/commonResponse.type.ts";
 //   });
 // }
 
-// export const getStudents = async (_: GetStudents, res: CommonResponse) =>
-//   res.send({
-//     message: (await getStudentsCtrl({}).populate("owner", "name age _id")).map(({ name, owner, _id }) => ({
-//       name,
-//       owner: {
-//         name: owner.name,
-//         age: owner.age,
-//         id: owner.id,
-//       },
-//       id: _id,
-//     })),
-//   });
+export const getStudents = async (_: GetStudents, res: CommonResponse) =>
+  res.send({
+    message: (await getStudentsCtrl()).map((s) => ({
+      id: s._id,
+      name: s.name,
+      status: s.status,
+      career: s.career,
+      birthDate: s.birthDate,
+      secondName: s.secondName,
+      ...(s.email && { email: s.email }),
+      ...(s.phone && { phone: s.phone }),
+      ...(s.direction && { direction: s.direction }),
+    })),
+  });
 
 export async function postStudent({ body }: PostStudent, res: CommonResponse) {
   const careerCount = await countCareers({ _id: body.career });
