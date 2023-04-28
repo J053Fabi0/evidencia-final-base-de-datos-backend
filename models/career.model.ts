@@ -1,6 +1,6 @@
 import { mongoose } from "../deps.ts";
-import adminSchema from "../schemas/mongo/career.schema.ts";
+import careerSchema from "../schemas/mongo/career.schema.ts";
 
-const Career = mongoose.model("Career", adminSchema);
+const Career = mongoose.model("Career", careerSchema);
 
 export default Career;
