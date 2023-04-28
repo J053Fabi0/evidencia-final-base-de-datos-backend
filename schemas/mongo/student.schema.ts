@@ -6,6 +6,11 @@ const studentSchema = new Schema({
   secondName: { type: String, required: true },
   status: { type: String, enum: ["inscrito", "no inscrito"], required: true },
   career: { type: Schema.Types.ObjectId, ref: "Career", index: true, required: true },
+
+  // optional
+  email: String,
+  phone: String,
+  direction: String,
 });
 
 export default studentSchema;
