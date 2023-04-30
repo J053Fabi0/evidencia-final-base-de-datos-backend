@@ -66,8 +66,8 @@ export async function updateStudent({ body: { _id, ...data } }: UpdateStudent, r
   res.send({ message: normalizeStudent(updateStudent) });
 }
 
-export async function deleteStudent({ body }: DeleteStudent, res: CommonResponse) {
-  const { deletedCount } = await deleteOneStudent(body);
+export async function deleteStudent({ params }: DeleteStudent, res: CommonResponse) {
+  const { deletedCount } = await deleteOneStudent(params);
   if (deletedCount === 0) return handleError(res, "Student not found", 404);
 
   res.send({ message: "Student deleted" });

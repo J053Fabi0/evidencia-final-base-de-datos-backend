@@ -11,6 +11,6 @@ studentRoutes.post("/student", s.postStudent, c.postStudent);
 
 studentRoutes.patch("/student", s.updateStudent, c.updateStudent);
 
-studentRoutes.delete("/student", s.deleteStudent, c.deleteStudent);
+studentRoutes.delete("/student/:id", s.deleteStudent, c.deleteStudent);
 
 export default studentRoutes;

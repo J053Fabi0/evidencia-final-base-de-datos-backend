@@ -31,4 +31,4 @@ export type PostStudent = CommonRequest<{
 
 export type UpdateStudent = CommonRequest<{ _id: Student["_id"] } & Partial<Omit<Student, "_id">>>;
 
-export type DeleteStudent = CommonRequest<{ _id: string }>;
+export type DeleteStudent = CommonRequest<undefined, undefined, { _id: string }>;

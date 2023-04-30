@@ -50,4 +50,4 @@ export const updateStudent = a(
     .or("name", "status", "career", "birthDate", "secondName", "email", "phone", "direction")
 );
 
-export const deleteStudent = a(joi.object({ id: id.required() }));
+export const deleteStudent = a(joi.object({ id: id.required() }), "params");
