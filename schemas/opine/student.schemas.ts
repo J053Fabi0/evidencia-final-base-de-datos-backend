@@ -28,9 +28,9 @@ export const postStudent = a(
     birthDate: birthDate.required(),
     secondName: secondName.required(),
     // optional
-    email,
-    phone,
-    direction,
+    email: email.allow(""),
+    phone: phone.allow(""),
+    direction: direction.allow(""),
   })
 );
 
@@ -39,13 +39,13 @@ export const updateStudent = a(
     .object({
       id: id.required(),
       name,
-      email,
-      phone,
       status,
       career,
       birthDate,
-      direction,
       secondName,
+      email: email.allow(""),
+      phone: phone.allow(""),
+      direction: direction.allow(""),
     })
     .or("name", "status", "career", "birthDate", "secondName", "email", "phone", "direction")
 );
