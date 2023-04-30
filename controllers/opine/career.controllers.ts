@@ -29,8 +29,8 @@ export const getCareers = async (_: GetCareers, res: CommonResponse) => {
 };
 
 export const postCareer = async ({ body }: PostCareer, res: CommonResponse) => {
-  const { name, _id } = await createCareer(body);
-  res.send({ message: { name, id: _id } });
+  const { _id } = await createCareer(body);
+  res.send({ message: _id });
 };
 
 export const updateCareer = async ({ body }: UpdateCareer, res: CommonResponse) => {
