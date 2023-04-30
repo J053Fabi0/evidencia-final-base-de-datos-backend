@@ -1,7 +1,7 @@
 import { Joi } from "../../deps.ts";
 import { a, id, joi } from "./schemaUtils.ts";
 
-const name = Joi.string().min(2);
+const name = Joi.string().min(2).max(80);
 
 export const getCareers = a(joi.object({}), "query");
 
