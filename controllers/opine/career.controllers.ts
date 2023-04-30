@@ -40,8 +40,8 @@ export const updateCareer = async ({ body }: UpdateCareer, res: CommonResponse) 
   res.send({ message: "Done" });
 };
 
-export const deleteCareer = async ({ body }: DeleteCareer, res: CommonResponse) => {
-  const { deletedCount } = await deleteOneCareer(body);
+export const deleteCareer = async ({ params }: DeleteCareer, res: CommonResponse) => {
+  const { deletedCount } = await deleteOneCareer(params);
   if (deletedCount === 0) return handleError(res, "Career not found", 404);
 
   res.send({ message: "Career deleted" });

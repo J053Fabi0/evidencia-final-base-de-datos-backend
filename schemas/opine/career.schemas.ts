@@ -18,4 +18,4 @@ export const updateCareer = a(
   })
 );
 
-export const deleteCareer = a(joi.object({ id: id.required() }));
+export const deleteCareer = a(joi.object({ id: id.required() }), "params");
