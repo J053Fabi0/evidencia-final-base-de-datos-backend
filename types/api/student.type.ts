@@ -11,7 +11,7 @@ export type Student = {
   birthDate: Date;
   secondName: string;
   direction?: string;
-  _id: string | Types.ObjectId;
+  _id: Types.ObjectId;
 };
 
 export type GetStudent = CommonRequest<undefined, { _id: string }>;

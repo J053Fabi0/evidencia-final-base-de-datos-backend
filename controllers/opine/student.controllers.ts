@@ -25,6 +25,7 @@ function normalizeStudent<T extends Student>(student: T) {
     career: student.career,
     birthDate: student.birthDate,
     secondName: student.secondName,
+    createdAt: student._id.getTimestamp(),
     ...(student.email && { email: student.email }),
     ...(student.phone && { phone: student.phone }),
     ...(student.direction && { direction: student.direction }),
