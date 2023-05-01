@@ -1,5 +1,6 @@
 {
   "imports": {
+    "mongoose": "npm:mongoose@^6.11.0",
     "joi": "https://esm.sh/joi@17.9.2/",
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
     "opine": "https://deno.land/x/opine@2.3.4/mod.ts",
