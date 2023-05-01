@@ -1,6 +1,11 @@
 {
   "importMap": "./import_map.json",
   "tasks": {
+    "stop": "pm2 stop estudiantes",
+    "start": "pm2 start --interpreter='deno' --interpreter-args='run --allow-sys --allow-net --allow-read --allow-env --allow-run --allow-write' --name estudiantes index.ts && pm2 logs estudiantes",
+    "logs": "pm2 logs estudiantes",
+    "reload": "pm2 reload estudiantes && pm2 logs estudiantes",
+
     "watch": "deno run -A --watch --unstable index.ts",
     "run": "deno run -A --unstable index.ts"
   },
